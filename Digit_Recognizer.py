@@ -1,6 +1,7 @@
 # Digit Recognizer - Kaggle Competition
 # 手寫數字識別競賽完整解決方案
 
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
