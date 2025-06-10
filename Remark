@@ -1,0 +1,13 @@
+上傳流程
+添加所有文件
+1. git add .
+提交
+2. git commit -m "XXX"
+推送到 GitHub
+3. git push -u origin main
+
+安裝套件
+uv add XXX
+
+執行程式
+uv run XXX.py
