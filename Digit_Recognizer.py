@@ -75,3 +75,6 @@ def processing_data(train_data, test_data):
     )
 
     return X_train, X_val, y_train, y_val, X_test
+
+# 3. 隨機森林模型
+def train_random_forest(X)
