@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.model_selection import train_test_split
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -32,7 +33,7 @@ def explore_data(train_data):
     plt.subplot(1, 2, 2)
     fig, axes = plt.subplot(2, 5, figsize = (12, 6))
     for i in range(10):
-        digit_data = train_data[train_data['label'] = i].iloc[0, 1:].values
+        digit_data = train_data[train_data['label'] == i].iloc[0, 1:].values
         digit_image = digit_data.reshape(28, 28)
 
         row, col = i // 5, i % 5
@@ -64,3 +65,13 @@ def visualize_samples(train_data, num_samples=20):
     plt.show()
 
 # 2. 資料預處理
+def processing_data(train_data, test_data):
+    X = train_data.drop('label', axis = 1).values / 255.0
+    y = train_data['label'].values
+    X_test = test_data.values / 255.0
+
+    X_train, X_val, y_train, y_val = train_test_split(
+        X, y, test_size = 0.2, random_state = 42, stratify = y
+    )
+
+    return X_train, X_val, y_train, y_val, X_test
