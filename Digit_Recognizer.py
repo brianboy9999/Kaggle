@@ -5,7 +5,10 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.preprocessing import StandardScaler
+import torch
+import torch.nn as nn
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -129,5 +132,24 @@ def train_svm(X_train, y_train, X_val, y_val):
 class DigitCNN(nn.Module):
     def __init__(self):
         super(DigitCNN, self).__init__()
+
+        # 卷積層
+        self.conv1 = nn.Conv2d(1, 32, kernel_size = 3, padding = 1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size = 3, padding = 1)
+        self.conv3 = nn.Conv2d(64, 128, kernel_size = 3, padding = 1)
+
+        # 池化層
+        self.pool = nn.MaxPool2d(2, 2)
+
+        # Dropout
+        self.dropout1 = nn.Dropout(0.25)
+        self.dropout2 = nn.Dropout(0.5)
+
+        #全連接層
+        self.fc1 = nn.Linear(128 * 3 * 3, 512)
+        self.fc2 = nn.Linear(512, 10)
+        
+        #激活函數
+        self.relu = nn.ReLU()
 
         
